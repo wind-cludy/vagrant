@@ -1,0 +1,35 @@
+{
+    "name": "mysql",
+    "description": "",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+      "lamp": {
+        "mysqld": {
+          "version": "5.6",
+          "master": {
+            "name": "master",
+            "root_password": "MySQLPassw0rd",
+            "port": "3306",
+            "host": "127.0.0.1"
+          },
+          "db" : {
+            "application" : "db",
+            "test" : "test_db"
+          },
+          "user": {
+            "id": "user",
+            "password": "user_secret"
+          }
+        }
+      }
+    },
+    "chef_type": "role",
+    "run_list": [
+        "recipe[lamp::mysql-server]",
+        "recipe[lamp::mysql-database]"
+    ],
+    "env_run_lists": {
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "name": "session",
+    "description": "",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+        "redisio": {
+           "servers": [
+                {
+                    "port": "6379",
+                    "name": "master"
+                },
+                {
+                    "port" : "6380",
+                    "name": "slave",
+                    "slaveof": {
+                        "address": "127.0.0.1",
+                        "port": "6379"
+                    }
+                }
+            ]
+        }
+    },
+    "chef_type": "role",
+    "run_list": [
+        "recipe[lamp::redisio]"
+    ],
+    "env_run_lists": {
+    }
+}

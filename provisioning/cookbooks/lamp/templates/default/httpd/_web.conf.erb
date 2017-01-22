@@ -1,0 +1,30 @@
+<VirtualHost *:<%= @web_http_port %>>
+    ServerName <%= @web_server_name %>
+    DocumentRoot "<%= @web_document_root %>"
+    <Directory /<%= @web_document_root.split("/")[1] %>>
+        Options FollowSymLinks
+        AllowOverride All
+    </Directory>
+    
+    <% @aliases.each do |_alias| -%>
+    Alias "<%= _alias[:url_path] %>" "<%= _alias[:file_path] %>"
+    <% end -%>
+</VirtualHost>
+
+<VirtualHost *:<%= @web_https_port %>>
+    SSLEngine on
+    SSLProtocol +TLSv1.2
+    SSLCertificateFile <%= @ssl_certificate_file %>
+    SSLCertificateKeyFile <%= @ssl_certificate_key_file %>
+
+    ServerName <%= @web_server_name %>
+    DocumentRoot "<%= @web_document_root %>"
+    <Directory /<%= @web_document_root.split("/")[1] %>>
+        Options FollowSymLinks
+        AllowOverride All
+    </Directory>
+    
+    <% @aliases.each do |_alias| -%>
+    Alias "<%= _alias[:url_path] %>" "<%= _alias[:file_path] %>"
+    <% end -%>
+</VirtualHost>

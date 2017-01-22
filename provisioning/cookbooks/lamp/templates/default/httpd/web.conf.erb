@@ -1,0 +1,17 @@
+<% if @virtualhosts.length == 0 %>
+    <%= render 'httpd/_web.conf.rb' %>
+<% else %>
+    <% @virtualhosts.each do |host| %>
+        <%= render 'httpd/_web.conf.erb',
+            :variables => {
+                :web_server_name => host['server_name'],
+                :web_document_root => host['document_root'],
+                :web_http_port => @web_http_port,
+                :web_https_port => @web_https_port,
+                :aliases => @aliases,
+                :ssl_certificate_file => @ssl_certificate_file,
+                :ssl_certificate_key_file => @ssl_certificate_key_file
+            }
+        %>
+    <% end %>
+<% end %>

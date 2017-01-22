@@ -1,0 +1,43 @@
+{
+    "name": "local",
+    "description": "",
+    "cookbook_versions": {
+
+    },
+    "chef_type": "environment",
+    "json_class": "Chef::Environment",
+    "default_attributes": {
+    },
+    "override_attributes": {
+        "yum": {
+            "epel": {
+                "enabled": true
+            },
+            "remi": {
+                "enabled": true
+            },
+            "remi-php70": {
+                "enabled": true
+            }
+        },
+        "php": {
+            "packages": [
+                "php",
+                "php-opcache",
+                "php-devel",
+                "php-cli",
+                "php-pear",
+                "php-mbstring",
+                "php-mcrypt",
+                "php-pdo",
+                "php-mysqlnd",
+                "php-intl",
+                "php-xml",
+                "php-process",
+                "php-gd",
+                "php-pecl-redis",
+                "php-pecl-xdebug"
+            ]
+        }
+    }
+}

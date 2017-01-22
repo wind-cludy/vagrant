@@ -1,0 +1,100 @@
+{
+    "name": "vagrant-lamp",
+    "description": "",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+      "rbenv": {
+        "user_installs": [
+          {
+            "user": "vagrant",
+            "rubies": ["2.2.6"],
+            "global": "2.2.6",
+            "gems": {
+              "2.2.6": [
+                {
+                  "name": "bundler"
+                }
+              ]
+            },
+            "plugins": [
+              {
+                "name": "rbenv-sudo",
+                "git_url": "https://github.com/dcarley/rbenv-sudo.git"
+              }
+            ]
+          }
+        ]
+      },
+      "ruby_build": {
+        "upgrade": true,
+        "git_url": "git://github.com/rbenv/ruby-build.git",
+        "git_ref": "v20161121"
+      }
+    },
+    "override_attributes": {
+      "lamp": {
+        "httpd": {
+          "version": "2.4",
+          "web": {
+            "document_root": "/vagrant/app/webroot",
+            "owner": "vagrant",
+            "group": "vagrant",
+            "aliases": [
+              {
+                "url_path": "/mock",
+                "file_path": "/vagrant/webroot/mock"
+              }
+            ],
+            "virtualhosts": [
+              {
+                "server_name": "www.192.168.33.10.nip.io",
+                "document_root": "/vagrant/app/webroot"
+              },
+              {
+                "server_name": "farmer.192.168.33.10.nip.io",
+                "document_root": "/vagrant/farmer/webroot"
+              },
+              {
+                "server_name": "manage.192.168.33.10.nip.io",
+                "document_root": "/vagrant/manage/webroot"
+              },
+              {
+                "server_name": "matching.192.168.33.10.nip.io",
+                "document_root": "/vagrant/matching/webroot"
+              }
+            ]
+          }
+        },
+        "mysqld": {
+          "version": "5.6",
+          "master": {
+            "name": "server",
+            "root_password": "MySQLPassw0rd",
+            "port": "3306",
+            "host" : "127.0.0.1"
+          },
+          "db" : {
+            "application" : "develop_db",
+            "test" : "test_develop_db"
+          },
+          "user": {
+            "id": "user",
+            "password": "user_secret"
+          }
+        }
+      }
+    },
+    "chef_type": "role",
+    "run_list": [
+        "role[common]",
+        "role[nodejs]",
+        "recipe[lamp::rbenv-user]",
+        "role[mysql]",
+        "role[session]",
+        "role[php]",
+        "role[httpd]",
+        "recipe[lamp::httpd-vagrant]"
+    ],
+    "env_run_lists": {
+    }
+}

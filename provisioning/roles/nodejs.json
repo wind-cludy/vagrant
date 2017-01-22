@@ -1,0 +1,25 @@
+{
+    "name": "nodejs",
+    "description": "",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+      "nodejs": {
+        "npm_packages": [
+          {
+            "name": "bower"
+          },
+          {
+            "name": "grunt"
+          }
+        ]
+      }
+    },
+    "chef_type": "role",
+    "run_list": [
+        "recipe[lamp::nodejs]"
+    ],
+    "env_run_lists": {
+    }
+}

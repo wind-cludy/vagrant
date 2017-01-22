@@ -1,0 +1,7 @@
+# .phpファイルにアクセスした場合PHPスクリプトとして扱う記述
+AddType application/x-httpd-php .php
+
+# デフォルトファイルの追加
+<IfModule dir_module>
+  DirectoryIndex index.php index.html
+</IfModule>

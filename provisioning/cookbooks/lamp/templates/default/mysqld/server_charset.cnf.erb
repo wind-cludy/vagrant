@@ -1,0 +1,10 @@
+[client]
+default-character-set          = <%= @charset %>
+
+[mysql]
+default-character-set          = <%= @charset %>
+
+[mysqld]
+character-set-server=<%= @charset %>
+collation-server = <%= @collation %>
+skip-character-set-client-handshake

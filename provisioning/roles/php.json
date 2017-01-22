@@ -1,0 +1,22 @@
+{
+    "name": "php",
+    "description": "",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+      "php": {
+        "directives": {
+          "error_log": "/var/log/php_errors.log",
+          "expose_php": "Off",
+          "pcre.jit": "Off"
+        }
+      }
+    },
+    "override_attributes": {
+    },
+    "chef_type": "role",
+    "run_list": [
+        "recipe[lamp::php]"
+    ],
+    "env_run_lists": {
+    }
+}

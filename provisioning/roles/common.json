@@ -1,0 +1,17 @@
+{
+    "name": "common",
+    "description": "",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+    },
+    "chef_type": "role",
+    "run_list": [
+        "recipe[lamp::selinux-disable]",
+        "recipe[lamp::build-essential]",
+        "recipe[lamp::sqlite]"
+    ],
+    "env_run_lists": {
+    }
+}
